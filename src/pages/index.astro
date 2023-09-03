@@ -1,0 +1,7 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Home">
+	<div hx-trigger="load" hx-get="/htmx/todo" hx-select="#todo-list-container" hx-swap="outerHTML"></div>
+</MainLayout>

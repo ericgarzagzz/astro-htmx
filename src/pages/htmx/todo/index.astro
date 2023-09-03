@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+import { PrismaClient } from "@prisma/client";
+import TodoList from "../../../components/todo/TodoList.astro";
+
+const prisma = new PrismaClient();
+
+const todos = await prisma.todo.findMany();
+await prisma.$disconnect();
+---
+
+<TodoList todos={todos} />

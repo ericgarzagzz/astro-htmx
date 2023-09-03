@@ -1,0 +1,41 @@
+---
+import type { Todo } from '@prisma/client';
+import { formatRelative } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+interface Props {
+    item: Todo
+}
+
+const { item } = Astro.props;
+---
+
+<style is:inline>
+    .todo-item {
+        display: flex;
+        gap: 1em;
+    }
+
+    .todo-item-content {
+        display: block;
+    }
+
+    .todo-item-content__title {
+        margin: 0;
+        padding: 0;
+    }
+
+    .todo-item-content__date {
+        margin: 0;
+        padding: 0;
+        color: #8d8d8d;
+    }
+</style>
+
+<div class="todo-item">
+    <input type="checkbox" checked={item.done}/>
+    <div class="todo-item-content">
+        <a class="todo-item-content__title" href=`/todo/${item.id}`>{item.title}</a>
+        <p class="todo-item-content__date">{formatRelative(item.createdAt, new Date(), { locale: es })}</p>
+    </div>
+</div>

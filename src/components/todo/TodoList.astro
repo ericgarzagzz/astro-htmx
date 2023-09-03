@@ -1,0 +1,15 @@
+---
+import type { Todo } from "@prisma/client"
+import TodoItem from "./TodoItem.astro";
+
+interface Props {
+    todos: Todo[]
+}
+const { todos } = Astro.props;
+---
+
+<div id="todo-list-container">
+    {todos.map((todoItem) => (
+        <TodoItem item={todoItem} />
+    ))}
+</div>

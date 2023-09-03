@@ -1,0 +1,22 @@
+---
+export const prerender = false;
+import { PrismaClient } from "@prisma/client";
+
+const { id } = Astro.params;
+
+const prisma = new PrismaClient();
+
+const todo = await prisma.todo.findUnique({
+  where: {
+    id: Number(id),
+  },
+});
+
+await prisma.$disconnect();
+---
+
+<div id="todo-item">
+    <h1>{todo?.title}</h1>
+    <p>{todo?.content}</p>
+    <p>{todo?.done ? "Completed" : "Not completed"}</p>
+</div>
